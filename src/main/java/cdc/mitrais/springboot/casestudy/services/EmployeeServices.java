@@ -19,7 +19,7 @@ import cdc.mitrais.springboot.casestudy.model.Employee;
 public class EmployeeServices {
 
 	@Autowired
-	private EmployeeRepository empRepo;
+	private EmployeeRepository employeeRepository;
 	
 	@Autowired
 	private EmployeeRepositoryWithPaging empRepoWithPaging;
@@ -34,30 +34,36 @@ public class EmployeeServices {
 	@Transactional
 	public List<Employee> getEmployeeListWithoutPaging(){
 		
-		return Lists.newArrayList(empRepo.findAll());
+		return Lists.newArrayList(employeeRepository.findAll());
 	}
 	
 	@Transactional
 	public Employee getEmployeeById(int id) {
-		return empRepo.findById(id).get();
+		return employeeRepository.findById(id).get();
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Transactional
 	public Employee updateEmployeeSalary(Employee emp) {
-		empRepo.save(emp);
+		employeeRepository.save(emp);
 		return emp;
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Transactional
 	public Employee addEmployee(Employee emp) {
-		return empRepo.save(emp);
+		return employeeRepository.save(emp);
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Transactional
 	public void deleteEmployee(Employee emp) {
-		 empRepo.delete(emp);
+		employeeRepository.delete(emp);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_USER')")
+	@Transactional
+	public Employee findEmployeeByName(String name) {
+		return employeeRepository.findByName(name);
 	}
 }

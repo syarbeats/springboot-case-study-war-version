@@ -193,6 +193,22 @@ public class HomeController {
 		
 		return "welcome";
 	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+	@RequestMapping(value = EmployeeRestURI.GET_EMPLOYEE_BY_NAME, method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<?> getEmployeeByName(@RequestParam(name="name") String name){
+		logger.info("Get Employee Data for name: "+name);
+		Employee emp;
+		
+		try{
+			emp = getEmployeeService().findEmployeeByName(name);
+		}catch(Exception e)
+		{
+			return new ResponseEntity<String>("Data Employe dengan namw "+name+" tidak ditemukan",HttpStatus.NOT_FOUND);
+		
+		}
+		return new ResponseEntity(emp, HttpStatus.OK);
+	}
 	 
 	public String getCurrentUsername() {
 		 
