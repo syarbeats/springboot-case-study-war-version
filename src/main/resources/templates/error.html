@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Access Denied</title>
+</head>
+<body>
+	<p th:text="'Dear ' + ${username} +', You do not have any authorization to access this page!!'"> Welcome to our grocery!</p>
+	<a th:href="@{http://localhost:8080}">Back to home</a>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">  
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
+<title>Display Employee</title>
+      <script src = "js/jquery-3.3.1.min.js"></script>
+      
+      <script>
+         $(document).ready(function(){
+            $.getJSON("http://localhost:8080/api/allEmployees", function(result){
+            	var trHTML = '';
+                $.each(result, function(key,value) {
+                  	//$("#productsJson").append(value.id+" "+value.name+" "+value.salary);
+                	trHTML += '<tr><td>' + value.id + '</td><td>' + value.name + '</td><td>' + value.salary + '</td></tr>';
+               });
+               $('#records_table').append(trHTML); 
+            });
+         });
+      </script>
+</head>
+<body>
+	<div class="jumbotron text-center">
+		  <h1>SPRING RMS CASE STUDY</h1>
+		  <p>SIMPLE CRUD PROJECT USING SPRING FRAMEWORK </p>
+		  <p><h3>DISPLAY ALL EMPLOYEES</h3></p>  
+    </div>
+
+	<div class="container">
+	            <div class="row" style="margin-top: 100px">
+	            	<div class="col-md-6">                	  
+	                		<button type="button" class="btn btn-secondary" onclick="location.href='http://localhost:8080/displayEmployee';">Show All Employee</button>              		               
+		                	<button type="button" class="btn btn-info" onclick="location.href='http://localhost:8080/updateEmployee';">Update Employee</button>	                               
+		                	<button type="button" class="btn btn-danger" onclick="location.href='http://localhost:8080/deleteEmployee';">Delete Employee</button>	                
+	                </div>
+	                <div class="col-md-6">                	
+	                		<button type="button" class="btn btn-dark" onclick="location.href='http://localhost:8080/addEmployee';">Insert Employee</button>	                	               
+		                	<button type="button" class="btn btn-info" onclick="location.href='http://localhost:8080/editEmployee';">Edit Employee</button>	                	               
+		                	<button type="button" class="btn btn-secondary" onclick="location.href='http://localhost:8080/logout';">Logout</button>	                
+	                </div>	                	                	                
+	            </div>
+	            <div class="row" style="margin-top: 20px">
+	            	<div class="col-md-6">
+	            	<label class="label label-primary">Using Model From Controller</label>
+	            	<table border='1'>   
+	            		<tr>
+							<th>ID</th>
+						    <th>NAME</th>
+						    <th>SALARY</th>
+						</tr>
+	            		<tr th:each="emp : ${employeeList}">
+						     <td th:text="${emp.id}">id</td>
+						     <td th:text="${emp.name}">name</td>
+						     <td th:text="${emp.salary}">salary</td>
+						</tr>
+					</table>
+	            	</div>
+		            <div class="col-md-6">
+		            	<span class="label label-success">Using API Invocation</span>
+			            <table id="records_table" border='1'>
+						    <tr>
+						        <th>ID</th>
+						        <th>NAME</th>
+						        <th>SALARY</th>
+						    </tr>
+						</table>
+		            </div>
+	            </div>
+	</div>
+	<!--  <div id = "productsJson"> </div>-->
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Good Thymes Virtual Grocery</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+	<p th:text="#{welcome(${username})}"> Welcome to our grocery!</p>
+	<p th:text="#{app.name}"> Application Name</p>
+	<p>Today is: <span th:text="${today}">01 March 2019</span>.</p>
+	<div th:if="${isAdmin} == true">
+		Hello Admin
+	</div>
+	<div th:if="${isAdmin} == false">
+		Hello <p th:text="${username}"> Username</p>
+	</div>
+	
+	<p th:text="'Execution mode is ' + ((${environment} == 'prod')? 'Production' : 'Development')"/>
+</body>
+</html>

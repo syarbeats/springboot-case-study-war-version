@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Edit Employee</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+	<!-- <form action="#" th:action="@{/addEmployee}" th:object="${employee}" method="post">
+    	<p>Id: <input type="text" th:field="*{id}" /></p>
+        <p>name: <input type="text" th:field="*{name}" /></p>
+        <p>salary: <input type="text" th:field="*{salary}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form> -->
+    <div th:include="header :: header"></div>
+    <div class="container">
+    	<div class="row" style="margin-top: 10px">
+    		<div class="col-md-12">  
+    			<div th:include="menu :: menu"></div>
+    		</div>
+    	</div>
+	    <div class="row" style="margin-top: 20px">
+	    	<div class="col-md-12">  
+		    	<h2>Edit Existing Employee</h2>
+				  <form class="form-horizontal" action="#" th:action="@{/addEmployee}" th:object="${employee}" method="post">
+				    <div class="form-group">
+				      <label class="control-label col-sm-2" for="id">ID:</label>
+				      <div class="col-sm-10">
+				        <input type="text" th:field="*{id}" class="form-control" placeholder="Enter employee id" name="id" th:value="${employee.id}">
+				      </div>
+				    </div>
+				    
+				   <div class="form-group">
+				      <label class="control-label col-sm-2" for="name">NAME:</label>
+				      <div class="col-sm-10">
+				        <input type="text" th:field="*{name}" class="form-control" placeholder="Enter employee name" name="name" th:value="${employee.name}">
+				      </div>
+				    </div>
+				    
+				    <div class="form-group">
+				      <label class="control-label col-sm-2" for="salary">SALARY:</label>
+				      <div class="col-sm-10">
+				        <input type="text" th:field="*{salary}" class="form-control" placeholder="Enter employee salary" name="salary" th:value="${employee.salary}">
+				      </div>
+				    </div>
+				    
+				    <div class="form-group">        
+				      <div class="col-sm-offset-2 col-sm-10">
+				        <button type="submit" class="btn btn-info">Submit</button>
+				      </div>
+				    </div>
+				  </form>
+	    	</div> 
+	    	
+	    </div>
+	</div>
+
+</body>
+</html>

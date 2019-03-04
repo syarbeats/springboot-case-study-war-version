@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">  
+   <head>
+      <meta charset = "ISO-8859-1" />
+      <link href = "css/styles.css" rel = "stylesheet"/>
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+	  <script src="js/bootstrap.min.js"></script>
+      <title>Display All Employee</title>
+      
+      <script src = "js/jquery-3.3.1.min.js"></script>
+      <script>
+         $(document).ready(function(){
+            $.getJSON("http://localhost:8080/api/allEmployees", function(result){
+            	var trHTML = '';
+                $.each(result, function(key,value) {
+                  	//$("#productsJson").append(value.id+" "+value.name+" "+value.salary);
+                	trHTML += '<tr><td>' + "<a href = 'http://localhost:8080/editEmployee?id=" + value.id + "'>" + value.id +'</a>' + '</td><td>' + value.name + '</td><td>' + value.salary + '</td></tr>';
+               });
+               $('#employee_table').append(trHTML); 
+            });
+         });
+      </script>
+      
+   </head>
+   <body>
+   		<div th:include="header :: header"></div>
+   		<div class="container">
+   			<div th:include="menu :: menu"></div>
+   			
+   			<div class="row" style="margin-top: 20px">
+	            	<div class="col-md-6">
+	            	<label class="label label-primary">Using Model From Controller</label>
+	            	<table border='1'>   
+	            		<tr>
+							<th>ID</th>
+						    <th>NAME</th>
+						    <th>SALARY</th>
+						</tr>
+	            		<tr th:each="emp : ${employeeList}">
+						     <td th:text="${emp.id}" th:href="@{http://localhost:8080/editEmployee(id=${emp.id})}"><a href="#">id</a></td>
+						     <td th:text="${emp.name}">name</td>
+						     <td th:text="${emp.salary}">salary</td>
+						</tr>
+					</table>
+	            	</div>
+		            <div class="col-md-6">
+		            	<span class="label label-success">Using API Invocation</span>
+			            <table id="employee_table" border='1'>
+						    <tr>
+						        <th>ID</th>
+						        <th>NAME</th>
+						        <th>SALARY</th>
+						    </tr>
+						</table>
+		            </div>
+	            </div>
+   		</div>  	
+   </body>
+</html>
