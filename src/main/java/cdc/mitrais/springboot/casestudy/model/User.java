@@ -16,7 +16,7 @@ public class User implements Serializable{
 
 	@Column(name="id")
 	@Id
-	private String id;
+	private int id;
 	
 	@Column(name="password")
 	private String password;
@@ -36,13 +36,13 @@ public class User implements Serializable{
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	/**
