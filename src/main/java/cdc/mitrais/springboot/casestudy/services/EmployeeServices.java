@@ -37,6 +37,7 @@ public class EmployeeServices {
 		return Lists.newArrayList(employeeRepository.findAll());
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Transactional
 	public Employee getEmployeeById(int id) {
 		return employeeRepository.findById(id).get();

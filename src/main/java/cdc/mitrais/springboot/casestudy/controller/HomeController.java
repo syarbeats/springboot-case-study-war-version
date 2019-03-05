@@ -209,7 +209,16 @@ public class HomeController {
 		}
 		return new ResponseEntity(emp, HttpStatus.OK);
 	}
-	 
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = EmployeeViewURI.VIEW_SEARCH_EMPLOYEE, method = RequestMethod.POST)
+    public String searchEmployee(@RequestParam("id") int id, Model model) {
+		logger.info("Employee Id submitted by form: "+id);
+		Employee employee = this.getEmployeeService().getEmployeeById(id);
+		model.addAttribute("employee", employee);
+		return "update-employee";	
+	}
+	
 	public String getCurrentUsername() {
 		 
 		 String username;
