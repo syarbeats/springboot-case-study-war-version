@@ -170,6 +170,43 @@ public class HomeController {
 		return response;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = EmployeeRestURI.DELETE_EMPLOYEE_DATA, method = RequestMethod.POST)
+	public String deleteEmployeePOST(@ModelAttribute Employee employee, Model model){
+		logger.info("Delete Employee with Id: "+employee.getId());
+		String response;
+		
+		try {
+			getEmployeeService().deleteEmployee(employee);
+			response = "Data with Id: "+employee.getId() + " has been deleted successfully...";
+		}catch(Exception e) {
+			response = e.getMessage();
+		}
+		
+		model.addAttribute("response", response);
+		return "response";
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = EmployeeViewURI.VIEW_DELETE_EMPLOYE, method = RequestMethod.GET)
+	public String deleteEmployee(Model model) {
+		model.addAttribute("employee", new Employee());
+		return "delete-employee";
+	}
+	
+	@RequestMapping(value = EmployeeViewURI.VIEW_SEARCH_FOR_DELETE_EMPLOYEE, method = RequestMethod.POST)
+	public String searchForDeleteEmployee(@RequestParam(name = "id") int id, Model model) {
+		
+		Employee employee = null;
+		try {
+			employee = this.getEmployeeService().getEmployeeById(id);
+		}catch(Exception e) {
+			employee = new Employee();
+		}
+		
+		model.addAttribute("employee", employee);
+		return "delete-employee";
+	}
 	
 	@RequestMapping(value = EmployeeViewURI.VIEW_SHOW_EMPLOYE, method = RequestMethod.GET)
 	public ModelAndView  showEmployee() {
@@ -213,8 +250,14 @@ public class HomeController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = EmployeeViewURI.VIEW_SEARCH_EMPLOYEE, method = RequestMethod.POST)
     public String searchEmployee(@RequestParam("id") int id, Model model) {
+		
 		logger.info("Employee Id submitted by form: "+id);
-		Employee employee = this.getEmployeeService().getEmployeeById(id);
+		Employee employee = null;
+		try {
+			employee = this.getEmployeeService().getEmployeeById(id);
+		}catch(Exception e) {
+			employee = new Employee();
+		}
 		model.addAttribute("employee", employee);
 		return "update-employee";	
 	}
