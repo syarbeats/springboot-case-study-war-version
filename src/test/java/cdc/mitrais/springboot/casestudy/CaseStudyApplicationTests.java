@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -115,4 +116,14 @@ public class CaseStudyApplicationTests {
 		            .andExpect(jsonPath("$['salary']").value(85000));
 	 }
 
+	 @Test
+	 public void deleteEmployee() throws Exception {
+		 
+		 //Employee employee = new Employee(1125, "Axel Rose", 85000);
+		 int id = 1125;
+		 //String empJson = mapper.writeValueAsString(employee);   
+		 mockMvc.perform(delete("/api/delete_employee/"+id))
+		            .andExpect(status().isOk())
+		            .andExpect(content().string("Data with Id: "+id+ " has been deleted successfully..."));
+	 }
 }
