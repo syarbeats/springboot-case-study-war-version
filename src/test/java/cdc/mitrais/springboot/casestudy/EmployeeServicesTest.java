@@ -1,5 +1,7 @@
 package cdc.mitrais.springboot.casestudy;
 
+import java.util.NoSuchElementException;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,6 +64,28 @@ public class EmployeeServicesTest {
 		emp.setSalary(60000);/*Update his salary to 60000*/
 		employeeService.updateEmployeeSalary(emp);
 		Assert.assertEquals(60000, employeeService.getEmployeeById(406).getSalary());
+	}
+	
+	@Test
+	@Transactional
+	public void testSearchEmployee() {
+		/*
+		 * Employee with id=406, name=Elvis Presley, salary=55000
+		 * **/
+		Employee emp = employeeService.getEmployeeById(406); 
+		Assert.assertEquals(55000, employeeService.getEmployeeById(406).getSalary());
+	}
+	
+	@Test(expected = NoSuchElementException.class)
+	@Transactional
+    @Rollback(true)
+	public void testDeleteEmployee() {
+		/*
+		 * Employee with id=406, name=Elvis Presley, salary=55000
+		 * **/
+		Employee emp = employeeService.getEmployeeById(406); 
+		employeeService.deleteEmployee(emp);
+		Employee emp2 = employeeService.getEmployeeById(406);
 	}
 
 }

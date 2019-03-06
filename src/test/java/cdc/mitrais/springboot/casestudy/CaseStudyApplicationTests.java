@@ -3,9 +3,11 @@ package cdc.mitrais.springboot.casestudy;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 import java.nio.charset.Charset;
@@ -28,7 +30,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import cdc.mitrais.springboot.casestudy.config.EmployeeUserDetailsService;
+import cdc.mitrais.springboot.casestudy.model.Employee;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
@@ -52,6 +57,9 @@ public class CaseStudyApplicationTests {
 	
 	@Autowired
 	private WebApplicationContext webApplicationContext;
+	
+	@Autowired 
+	private ObjectMapper mapper;
 	
 	@Test
 	public void contextLoads() {
@@ -91,5 +99,20 @@ public class CaseStudyApplicationTests {
 		 /*THE SALARY FOR THE FIRST DATA MUST BE THE SAME WITH 55000*/
 		 .andExpect(jsonPath("$[0]['salary']").value(55000));
 	 } 
+	 
+	 @Test
+	 public void addEmployee() throws Exception {
+		 
+		 Employee employee = new Employee(1125, "Axel Rose", 85000);
+		 String empJson = mapper.writeValueAsString(employee);   
+		 mockMvc.perform(post("/api/add_employee")
+		                    .contentType(MediaType.APPLICATION_JSON)
+		                    .content(empJson)
+		                    .accept(MediaType.APPLICATION_JSON))
+		            .andExpect(status().isOk())
+		            .andExpect(jsonPath("$['id']").value(1125))
+		            .andExpect(jsonPath("$['name']").value("Axel Rose"))
+		            .andExpect(jsonPath("$['salary']").value(85000));
+	 }
 
 }
