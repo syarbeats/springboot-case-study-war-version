@@ -104,23 +104,23 @@ public class CaseStudyApplicationTests {
 	 @Test
 	 public void addEmployee() throws Exception {
 		 
-		 Employee employee = new Employee(1125, "Axel Rose", 85000);
+		 Employee employee = new Employee(1126, "Asep Truna", 65000);
 		 String empJson = mapper.writeValueAsString(employee);   
 		 mockMvc.perform(post("/api/add_employee")
 		                    .contentType(MediaType.APPLICATION_JSON)
 		                    .content(empJson)
 		                    .accept(MediaType.APPLICATION_JSON))
 		            .andExpect(status().isOk())
-		            .andExpect(jsonPath("$['id']").value(1125))
-		            .andExpect(jsonPath("$['name']").value("Axel Rose"))
-		            .andExpect(jsonPath("$['salary']").value(85000));
+		            .andExpect(jsonPath("$['id']").value(1126))
+		            .andExpect(jsonPath("$['name']").value("Asep Truna"))
+		            .andExpect(jsonPath("$['salary']").value(65000));
 	 }
 
 	 @Test
 	 public void deleteEmployee() throws Exception {
 		 
 		 //Employee employee = new Employee(1125, "Axel Rose", 85000);
-		 int id = 1125;
+		 int id = 1126;
 		 //String empJson = mapper.writeValueAsString(employee);   
 		 mockMvc.perform(delete("/api/delete_employee/"+id))
 		            .andExpect(status().isOk())
