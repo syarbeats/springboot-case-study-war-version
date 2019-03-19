@@ -27,7 +27,7 @@ public class EmployeeServices {
 	@SuppressWarnings("deprecation")
 	@Transactional
 	public List<Employee> getEmployeeList(int page, int size){
-		
+		//PageRequest request = new PageRequest(size, size, null);
 		return Lists.newArrayList(empRepoWithPaging.findAll(new PageRequest(page,size)));
 	}
 	

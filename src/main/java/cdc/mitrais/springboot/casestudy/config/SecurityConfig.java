@@ -3,6 +3,7 @@ package cdc.mitrais.springboot.casestudy.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -48,5 +49,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public UserDetailsService userDetailsService() {
 		logger.info("set EmployeeUserDetailsService.....");
 	    return new EmployeeUserDetailsService();
+	}
+	
+	@Bean
+	public FilterRegistrationBean corsFilterRegistration() {
+		logger.info("CORS Filter process.....");
+		FilterRegistrationBean registrationBean = new FilterRegistrationBean(new CORSFilter());
+		registrationBean.setName("CORS Filter");
+		registrationBean.addUrlPatterns("/*");
+		registrationBean.setOrder(1);
+		return registrationBean;
 	}
 }
