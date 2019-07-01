@@ -89,12 +89,12 @@ public class CaseStudyApplicationTests {
 	 } 
 	 
 	 @Test
-	 public void getEmployeeForPage1Size10() throws Exception {
-		 mockMvc.perform(get("/api/employees?page=1&size=10"))
+	 public void getEmployeeForPage1Size5() throws Exception {
+		 mockMvc.perform(get("/api/employees?page=1&size=5"))
 		 .andExpect(status().isOk())
 		 .andExpect(content().contentType(contentType))
-		 /*THE RESPONSE MUS BE CONTAIN 10 JSON DATA*/
-		 .andExpect(jsonPath("$",iterableWithSize(10))) 
+		 /*THE RESPONSE MUS BE CONTAIN 5 JSON DATA*/
+		 .andExpect(jsonPath("$",iterableWithSize(5))) 
 		 /*THE NAME FOR THE FIRST DATA MUST BE THE SAME WITH Brian Eipstin*/
 		 .andExpect(jsonPath("$[0]['name']",containsString("Brian Eipstin")))
 		 /*THE SALARY FOR THE FIRST DATA MUST BE THE SAME WITH 55000*/
