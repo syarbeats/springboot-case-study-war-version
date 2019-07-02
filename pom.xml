@@ -88,6 +88,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>case-study</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
