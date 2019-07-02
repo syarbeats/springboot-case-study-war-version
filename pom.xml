@@ -11,6 +11,7 @@
 	<groupId>cdc.mitrais.springboot</groupId>
 	<artifactId>case-study</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging> 
 	<name>case-study</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -79,6 +80,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        <dependency> 
+		   <groupId>org.springframework.boot</groupId>
+		   <artifactId>spring-boot-starter-tomcat</artifactId>         
+		   <scope>provided</scope> 
+		 </dependency>
 	</dependencies>
 
 	<build>
@@ -89,5 +95,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
