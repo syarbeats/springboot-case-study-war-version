@@ -9,7 +9,7 @@
       
       <script>
          $(document).ready(function(){
-            $.getJSON("http://54.169.96.66:8080/case-study/api/allEmployees", function(result){
+            $.getJSON("http://128.199.158.139:8080/case-study/api/allEmployees", function(result){
             	var trHTML = '';
                 $.each(result, function(key,value) {
                   	//$("#productsJson").append(value.id+" "+value.name+" "+value.salary);
@@ -30,14 +30,14 @@
 	<div class="container">
 	            <div class="row" style="margin-top: 100px">
 	            	<div class="col-md-6">                	  
-	                		<button type="button" class="btn btn-secondary" onclick="location.href='http://localhost:8080/displayEmployee';">Show All Employee</button>              		               
-		                	<button type="button" class="btn btn-info" onclick="location.href='http://localhost:8080/updateEmployee';">Update Employee</button>	                               
-		                	<button type="button" class="btn btn-danger" onclick="location.href='http://localhost:8080/deleteEmployee';">Delete Employee</button>	                
+	                		<button type="button" class="btn btn-secondary" onclick="location.href='http://128.199.158.139:8080/displayEmployee';">Show All Employee</button>              		               
+		                	<button type="button" class="btn btn-info" onclick="location.href='http://128.199.158.139:8080/updateEmployee';">Update Employee</button>	                               
+		                	<button type="button" class="btn btn-danger" onclick="location.href='http://128.199.158.139:8080/deleteEmployee';">Delete Employee</button>	                
 	                </div>
 	                <div class="col-md-6">                	
-	                		<button type="button" class="btn btn-dark" onclick="location.href='http://localhost:8080/addEmployee';">Insert Employee</button>	                	               
-		                	<button type="button" class="btn btn-info" onclick="location.href='http://localhost:8080/editEmployee';">Edit Employee</button>	                	               
-		                	<button type="button" class="btn btn-secondary" onclick="location.href='http://localhost:8080/logout';">Logout</button>	                
+	                		<button type="button" class="btn btn-dark" onclick="location.href='http://128.199.158.139:8080/addEmployee';">Insert Employee</button>	                	               
+		                	<button type="button" class="btn btn-info" onclick="location.href='http://128.199.158.139:8080/editEmployee';">Edit Employee</button>	                	               
+		                	<button type="button" class="btn btn-secondary" onclick="location.href='http://128.199.158.139:8080/logout';">Logout</button>	                
 	                </div>	                	                	                
 	            </div>
 	            <div class="row" style="margin-top: 20px">

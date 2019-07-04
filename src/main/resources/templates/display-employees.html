@@ -10,11 +10,11 @@
       <script src = "js/jquery-3.3.1.min.js"></script>
       <script>
          $(document).ready(function(){
-            $.getJSON("http://54.169.96.66:8080/case-study/api/allEmployees", function(result){
+            $.getJSON("http://128.199.158.139:8080/case-study/api/allEmployees", function(result){
             	var trHTML = '';
                 $.each(result, function(key,value) {
                   	//$("#productsJson").append(value.id+" "+value.name+" "+value.salary);
-                	trHTML += '<tr><td>' + "<a href = 'http://54.169.96.66:8080/case-study/editEmployee?id=" + value.id + "'>" + value.id +'</a>' + '</td><td>' + value.name + '</td><td>' + value.salary + '</td></tr>';
+                	trHTML += '<tr><td>' + "<a href = 'http://128.199.158.139:8080/case-study/editEmployee?id=" + value.id + "'>" + value.id +'</a>' + '</td><td>' + value.name + '</td><td>' + value.salary + '</td></tr>';
                });
                $('#employee_table').append(trHTML); 
             });
